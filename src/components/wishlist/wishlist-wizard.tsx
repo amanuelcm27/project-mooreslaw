@@ -2,7 +2,7 @@
 
 import { ArrowLeft, ArrowRight, CheckCircle2, Edit3, Info, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { buttonStyles } from "@/components/ui/button";
 import { cn } from "@/components/ui/cn";
@@ -230,7 +230,7 @@ function CompletionState({
         <CheckCircle2 className="h-10 w-10" />
       </div>
       <div className="space-y-3">
-        <h3 className="text-3xl font-semibold tracking-[-0.04em]">You're on the wishlist.</h3>
+        <h3 className="text-3xl font-semibold tracking-[-0.04em]">You&apos;re on the wishlist.</h3>
         <p className="max-w-2xl text-base leading-8 text-[color:var(--secondary)]">
           Thanks for helping us understand what Ethiopian AI builders need. Your responses will help shape the first version of the platform.
         </p>
@@ -276,7 +276,7 @@ export function WishlistWizard() {
 
   const toggleMulti = (field: "workloads" | "providersUsed" | "reasonNeverUsed" | "currentPainPoints", value: string) => {
     setDraft((current) => {
-      const selected = current[field];
+      const selected = current[field] as string[];
       let nextValues = selected.includes(value) ? selected.filter((entry) => entry !== value) : [...selected, value];
 
       if (field === "currentPainPoints" && value === "None of these") {
@@ -297,6 +297,7 @@ export function WishlistWizard() {
     const index = steps.findIndex((step) => step.key === key);
     if (index >= 0) {
       setCurrentStepIndex(index);
+      setStatusMessage(index === steps.length - 1 ? "Review your responses before submitting." : `Step ${index + 1} of ${questionCount} ready.`);
     }
     setStepError(null);
     setSubmissionError(null);
@@ -304,7 +305,9 @@ export function WishlistWizard() {
 
   const goBack = () => {
     if (currentStepIndex > 0) {
-      setCurrentStepIndex((value) => value - 1);
+      const nextIndex = currentStepIndex - 1;
+      setCurrentStepIndex(nextIndex);
+      setStatusMessage(nextIndex === steps.length - 1 ? "Review your responses before submitting." : `Step ${nextIndex + 1} of ${questionCount} ready.`);
     }
     setStepError(null);
     setSubmissionError(null);
@@ -323,7 +326,9 @@ export function WishlistWizard() {
       return;
     }
 
-    setCurrentStepIndex((value) => Math.min(value + 1, steps.length - 1));
+    const nextIndex = Math.min(currentStepIndex + 1, steps.length - 1);
+    setCurrentStepIndex(nextIndex);
+    setStatusMessage(nextIndex === steps.length - 1 ? "Review your responses before submitting." : `Step ${nextIndex + 1} of ${questionCount} ready.`);
     setStepError(null);
   };
 
@@ -366,15 +371,7 @@ export function WishlistWizard() {
   };
 
   const currentQuestionLabel = currentStep.key === "review" ? "Review before submission" : `Question ${currentQuestionNumber} of ${questionCount}`;
-
-  useEffect(() => {
-    if (currentStep.key === "review") {
-      setStatusMessage("Review your responses before submitting.");
-      return;
-    }
-
-    setStatusMessage(`Step ${currentQuestionNumber} of ${questionCount} ready.`);
-  }, [currentStep.key, currentQuestionNumber, questionCount]);
+  const isReviewStep = clampedIndex === steps.length - 1;
 
   const summaryText = useMemo(() => {
     return {
@@ -684,7 +681,7 @@ export function WishlistWizard() {
         >
           {currentStep.key !== "review" ? (
             <div className="space-y-2">
-              <SectionLabel>{currentStep.key === "review" ? "Review" : "Question"}</SectionLabel>
+              <SectionLabel>{isReviewStep ? "Review" : "Question"}</SectionLabel>
               <h3 className="text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">{currentStep.title}</h3>
               {currentStep.helperText ? <p className="max-w-2xl text-sm leading-7 text-[color:var(--secondary)]">{currentStep.helperText}</p> : null}
             </div>

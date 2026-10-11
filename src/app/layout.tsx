@@ -1,9 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import type { Viewport } from "next";
 import type { ReactNode } from "react";
 import { siteConfig } from "@/lib/site";
 
-const metadataBase = siteConfig.canonicalUrl ? new URL(siteConfig.canonicalUrl) : undefined;
+const metadataBase = new URL(siteConfig.canonicalUrl || "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase,
@@ -25,10 +26,13 @@ export const metadata: Metadata = {
     description: siteConfig.pageDescription,
     images: ["/opengraph-image"],
   },
-  themeColor: siteConfig.colors.background,
   icons: {
     icon: "/favicon.svg",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: siteConfig.colors.background,
 };
 
 type RootLayoutProps = Readonly<{

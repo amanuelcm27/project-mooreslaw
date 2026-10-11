@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Card } from "@/components/ui/card";
 import { WishlistWizard } from "@/components/wishlist/wishlist-wizard";
 
@@ -11,7 +12,7 @@ export function WishlistSection() {
             Help us build the right GPU cloud.
           </h2>
           <p className="text-base leading-8 text-[color:var(--secondary)]">
-            Tell us what you're trying to run, what's stopping you today, and what would make GPU access useful. Your answers will help determine what we build first.
+            Tell us what you&apos;re trying to run, what&apos;s stopping you today, and what would make GPU access useful. Your answers will help determine what we build first.
           </p>
           <div className="grid gap-3 text-sm text-[color:var(--secondary)]">
             <Card className="p-4">
@@ -35,7 +36,17 @@ export function WishlistSection() {
         </div>
 
         <Card className="overflow-hidden p-4 sm:p-6 lg:p-8">
-          <WishlistWizard />
+          <Suspense
+            fallback={
+              <div className="space-y-4 py-6 text-sm text-[color:var(--secondary)]">
+                <div className="h-4 w-40 rounded-full bg-white/5" />
+                <div className="h-2 w-full rounded-full bg-white/5" />
+                <div className="h-56 rounded-[1.5rem] border border-[color:var(--surface-border)] bg-[color:var(--surface-elevated)]/70" />
+              </div>
+            }
+          >
+            <WishlistWizard />
+          </Suspense>
         </Card>
       </div>
     </section>

@@ -45,6 +45,9 @@ export default function OpenGraphImage() {
               border: "1px solid rgba(245,230,66,0.35)",
               background: "rgba(23,26,32,0.9)",
               position: "relative",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <div style={{ position: "absolute", inset: 16, border: "1px solid rgba(245,230,66,0.7)", borderRadius: 12 }} />

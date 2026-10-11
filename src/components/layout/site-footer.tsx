@@ -1,5 +1,6 @@
 import { siteConfig } from "@/lib/site";
 import { BrandMark } from "@/components/ui/brand-mark";
+import { CurrentYear } from "@/components/ui/current-year";
 import { ScrollLink } from "@/components/ui/scroll-link";
 
 export function SiteFooter() {
@@ -25,7 +26,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-[color:var(--surface-border)]/70 px-4 py-4 text-center text-xs uppercase tracking-[0.28em] text-[color:var(--secondary)] sm:px-6 lg:px-8">
-        © {new Date().getFullYear()} {siteConfig.brandName}
+        © <CurrentYear /> {siteConfig.brandName}
       </div>
     </footer>
   );

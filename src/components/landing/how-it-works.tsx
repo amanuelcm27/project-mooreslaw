@@ -29,7 +29,7 @@ export function HowItWorksSection() {
     <section id="how-it-works" className="py-16 sm:py-20">
       <div className="max-w-2xl space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--primary)]">How it works</p>
-        <h2 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">We're exploring a simpler path to GPU compute.</h2>
+        <h2 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">We&apos;re exploring a simpler path to GPU compute.</h2>
         <p className="text-base leading-7 text-[color:var(--secondary)]">The exact product and supported access methods will be shaped by what early users actually need.</p>
       </div>
 

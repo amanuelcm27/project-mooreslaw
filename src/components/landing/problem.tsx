@@ -29,7 +29,7 @@ export function ProblemSection() {
     <section className="py-16 sm:py-20">
       <div className="max-w-2xl space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--primary)]">The problem</p>
-        <h2 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Getting GPU access shouldn't be the hardest part of building AI.</h2>
+        <h2 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Getting GPU access shouldn&apos;t be the hardest part of building AI.</h2>
         <p className="text-base leading-7 text-[color:var(--secondary)]">These are the frictions we are investigating, not universal facts for every team.</p>
       </div>
 

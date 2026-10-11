@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,9 +20,9 @@ export default function PrivacyPage() {
           <p>Replace this page with the production privacy policy before collecting real public submissions.</p>
           <p>Contact: <a className="text-[color:var(--primary-bright)]" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></p>
         </div>
-        <a href="/" className="inline-flex rounded-full border border-[color:var(--surface-border)] bg-[color:var(--surface-elevated)] px-5 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:border-[color:var(--primary)]/40">
+        <Link href="/" className="inline-flex rounded-full border border-[color:var(--surface-border)] bg-[color:var(--surface-elevated)] px-5 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:border-[color:var(--primary)]/40">
           Back to the wishlist
-        </a>
+        </Link>
       </article>
     </main>
   );
